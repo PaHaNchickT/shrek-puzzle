@@ -79,7 +79,7 @@ header {
   background-size: 100%;
 }
 
-.restart {
+.restart, .steps {
   width: 170px;
   height: 45px;
   -ms-flex-item-align: center;
@@ -93,10 +93,17 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 30px;
-  margin-bottom: 30px;
   border-radius: 10px;
-  cursor: pointer;
+}
+
+.restart {
+  margin-bottom: 30px;
   background-color: #3d3020;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.steps {
+  font-size: 20px;
 }
 /*# sourceMappingURL=style.css.map */
