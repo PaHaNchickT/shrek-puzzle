@@ -4,15 +4,12 @@ const body = document.querySelector('body')
 body.insertAdjacentHTML('beforeend', '<header>')
 body.querySelector('header').insertAdjacentHTML('beforeend', `<p>Shrek Puzzle</p>`)
 body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="steps">Steps 0</div>`)
-body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="timer">0 min 0 sec</div>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="timer">Your time</div>`)
 
 body.insertAdjacentHTML('beforeend', '<div class="items field-4"></div>')
 body.insertAdjacentHTML('beforeend', '<div class="restart">Restart</div>')
 
 body.insertAdjacentHTML('beforeend', '<footer><a href="https://github.com/PaHaNchickT">Made by PaHaNchickT</a><p>2022</p></footer>')
-
-// body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
-// body.insertAdjacentHTML('beforeend', `<footer></footer>`)
 
 /////////////////////////////////////////////////////init//////////////////////////////////////////
 
@@ -26,32 +23,51 @@ let items = document.querySelector('.items'),
     values = document.querySelector('.size-wrapper'),
     valuesList = document.querySelector('.values')
 
-let cells = [],
+////////////////////////////////////////////LOCAL STORAGE//////////////////////////////////////////
+
+let cells,
+    empty,
     elementsPerString = 4,
     isTimer = 0,
     steps = 0,
     timerID,
     isSound = true,
-    isMenu = false,
+    isMenu = false
 
+// cells = []
+// empty = {
+//     top: 0,
+//     left: 0
+// }
+
+if (localStorage.getItem('cells') === null && localStorage.getItem('empty') === null) {
+    cells = []
     empty = {
         top: 0,
         left: 0
     }
+    cells.push(empty)
+    elementsAdd(elementsPerString)
+} else {
+    cells = JSON.parse(localStorage.getItem('cells'))
+    empty = JSON.parse(localStorage.getItem('empty'))
+    elementsLoad(elementsPerString)
+}
 
-cells.push(empty)
+///////////////////////////////////////////////vars///////////////////////////////////////////////
 
-elementsAdd(elementsPerString)
+
 soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
 
-    valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
 
-    body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
-        e.addEventListener('click', () => {
-            elementsPerString = +e.innerHTML.slice(0, 1)
-            restartBtn()
-        })
+body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+    e.addEventListener('click', () => {
+        elementsPerString = +e.innerHTML.slice(0, 1)
+        restartBtn()
     })
+})
+
 
 ///////////////////////////////////////////////////adding elements///////////////////////////////////
 
@@ -104,6 +120,31 @@ function elementsAdd(amount) {
     }
 }
 
+function elementsLoad(amount) {
+    elementsPerString = localStorage.getItem('elements')
+    steps = localStorage.getItem('steps')
+    stepsText.innerHTML = `Steps ${steps}`
+    timer(localStorage.getItem('min'), localStorage.getItem('sec'))
+
+    console.log(elementsPerString)
+    settingsAdding()
+    items.classList.remove(items.className.slice(items.className.length - 7, items.className.length))
+    items.classList.add(`field-${elementsPerString}`)
+
+    cells = JSON.parse(localStorage.getItem('cells'))
+    empty = JSON.parse(localStorage.getItem('empty'))
+
+    for (let keys in cells) {
+        const cell = document.createElement('div')
+        cell.className = `cell cell-${elementsPerString}`
+        cell.innerHTML = cells[keys].inner
+
+        cell.style.left = `${cells[keys].left}px`
+        cell.style.top = `${cells[keys].top}px`
+
+        items.append(cell)
+    }
+}
 
 //////////////////////////////////////////////////deleting elements////////////////////////////////////////////
 
@@ -126,7 +167,7 @@ function click(cell) {
         e.addEventListener('click', () => {
             // debugger
             if (isTimer === 0) {
-                timer()
+                timer(0, 0)
             }
             cells.forEach(el => {
                 if (el.inner === +e.innerHTML) {
@@ -169,9 +210,7 @@ function click(cell) {
 
 ///////////////////////////////////////////////////////timer//////////////////////////////////////////////
 
-function timer() {
-    let seconds = 0,
-        minutes = 0
+function timer(minutes, seconds) {
     isTimer = 1
     timerID = setInterval(() => {
         seconds++
@@ -180,6 +219,8 @@ function timer() {
             seconds = 0
         }
         timerText.innerHTML = `${minutes} min ${seconds} sec`
+        localStorage.setItem('min', minutes)
+        localStorage.setItem('sec', seconds)
     }, 1000)
 }
 
@@ -213,7 +254,6 @@ function restartBtn() {
 
 function soundBtnFunc(elem) {
     elem.addEventListener('click', () => {
-        console.log('click')
         if (isSound === true) {
             soundBtn.childNodes[0].innerHTML = 'Sound On'
             isSound = false
@@ -247,3 +287,12 @@ function valueFunc(elem) {
         }
     })
 }
+
+///////////////////////////////////////////////////////set local storage//////////////////////////////////////////
+
+window.onbeforeunload = function () {
+    localStorage.setItem('cells', JSON.stringify(cells))
+    localStorage.setItem('empty', JSON.stringify(empty))
+    localStorage.setItem('elements', elementsPerString)
+    localStorage.setItem('steps', steps)
+};
