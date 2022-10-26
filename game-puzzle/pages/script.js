@@ -1,14 +1,23 @@
 // alert('Добрый день, уважаемый проверяющий! У меня был дикий заруб в ВУЗе и, к сожалению, я не успел сделать игру к понедельнику.. Буду безмерно Вам благодарен, если Вы проверите мою работу в четверг.. Discord для связи: ЗИЛИБОБКА-БЕЗУПРЕЧНЫЙ#4853')
 
 const body = document.querySelector('body')
-// body.insertAdjacentHTML('beforeend', `<header></header>`)
+body.insertAdjacentHTML('beforeend', '<header>')
+body.querySelector('header').insertAdjacentHTML('beforeend', `<p>Shrek Puzzle</p>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="steps">Steps 0</div>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="timer">0 min 0 sec</div>`)
+
+body.insertAdjacentHTML('beforeend', '<div class="items field-4"></div>')
+body.insertAdjacentHTML('beforeend', '<div class="restart">Restart</div>')
+
+body.insertAdjacentHTML('beforeend', '<footer><a href="https://github.com/PaHaNchickT">Made by PaHaNchickT</a><p>2022</p></footer>')
+
 // body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
 // body.insertAdjacentHTML('beforeend', `<footer></footer>`)
 
 /////////////////////////////////////////////////////init//////////////////////////////////////////
 
 
-const items = document.querySelector('.items'),
+let items = document.querySelector('.items'),
     timerText = document.querySelector('.timer'),
     restart = document.querySelector('.restart'),
     stepsText = document.querySelector('.steps'),
@@ -33,10 +42,35 @@ let cells = [],
 cells.push(empty)
 
 elementsAdd(elementsPerString)
+soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
+
+    valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+
+    body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+        e.addEventListener('click', () => {
+            elementsPerString = +e.innerHTML.slice(0, 1)
+            restartBtn()
+        })
+    })
 
 ///////////////////////////////////////////////////adding elements///////////////////////////////////
 
+function settingsAdding() {
+    items.insertAdjacentHTML('beforeend', `<div class="settings-wrapper">`)
+    items.querySelector('.settings-wrapper').insertAdjacentHTML('beforeend', `<div class="size-wrapper">`)
+    items.querySelector('.settings-wrapper').insertAdjacentHTML('beforeend', `<div class="sound-wrapper">`)
+    items.querySelector('.size-wrapper').insertAdjacentHTML('beforeend', `<p class="field-btn">Field size</p>`)
+    items.querySelector('.size-wrapper').insertAdjacentHTML('beforeend', `<div class="values menu-off"><p>3x3</p><p>4x4</p><p>5x5</p><p>6x6</p><p>7x7</p><p>8x8</p></div>`)
+    items.querySelector('.sound-wrapper').insertAdjacentHTML('beforeend', `<p>Sound Off</p>`)
+
+    soundBtn = document.querySelector('.sound-wrapper')
+    fieldBtn = document.querySelector('.field-btn')
+    values = document.querySelector('.size-wrapper')
+    valuesList = document.querySelector('.values')
+}
+
 function elementsAdd(amount) {
+    settingsAdding()
     items.classList.remove(items.className.slice(items.className.length - 7, items.className.length))
     items.classList.add(`field-${elementsPerString}`)
     cells = []
@@ -69,6 +103,7 @@ function elementsAdd(amount) {
         items.append(cell)
     }
 }
+
 
 //////////////////////////////////////////////////deleting elements////////////////////////////////////////////
 
@@ -128,8 +163,6 @@ function click(cell) {
     })
 }
 
-
-
 ///////////////////////////////////////////////////////timer//////////////////////////////////////////////
 
 function timer() {
@@ -160,9 +193,33 @@ function restartBtn() {
     steps = 0
     timerText.innerHTML = `0 min 0 sec`
     stepsText.innerHTML = `Steps 0`
+
+    soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
+
+    valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+
+    body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+        e.addEventListener('click', () => {
+            elementsPerString = +e.innerHTML.slice(0, 1)
+            restartBtn()
+        })
+    })
 }
 
 /////////////////////////////////////////////////////////sound/////////////////////////////////////////////////
+
+function soundBtnFunc(elem) {
+    elem.addEventListener('click', () => {
+        console.log('click')
+        if (isSound === true) {
+            soundBtn.childNodes[0].innerHTML = 'Sound On'
+            isSound = false
+        } else {
+            soundBtn.childNodes[0].innerHTML = 'Sound Off'
+            isSound = true
+        }
+    })
+}
 
 function sound() {
     let audio = new Audio()
@@ -172,33 +229,18 @@ function sound() {
     }
 }
 
-soundBtn.addEventListener('click', () => {
-    if (isSound === true) {
-        soundBtn.childNodes[1].innerHTML = 'Sound On'
-        isSound = false
-    } else {
-        soundBtn.childNodes[1].innerHTML = 'Sound Off'
-        isSound = true
-    }
-})
-
 ///////////////////////////////////////////////////////////field change////////////////////////////////////////////
 
-fieldBtn.addEventListener('click', () => {
-    if (isMenu === false) {
-        values.childNodes[3].classList.remove('menu-off')
-        values.childNodes[3].classList.add('menu-on')
-        isMenu = true
-    } else {
-        values.childNodes[3].classList.remove('menu-on')
-        values.childNodes[3].classList.add('menu-off')
-        isMenu = false
-    }
-})
-
-valuesList.querySelectorAll('p').forEach(e => {
-    e.addEventListener('click', () => {
-        elementsPerString = +e.innerHTML.slice(0, 1)
-        restartBtn()
+function valueFunc(elem) {
+    elem.addEventListener('click', () => {
+        if (isMenu === false) {
+            values.childNodes[1].classList.remove('menu-off')
+            values.childNodes[1].classList.add('menu-on')
+            isMenu = true
+        } else {
+            values.childNodes[1].classList.remove('menu-on')
+            values.childNodes[1].classList.add('menu-off')
+            isMenu = false
+        }
     })
-})
+}
