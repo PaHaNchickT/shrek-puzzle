@@ -1,50 +1,54 @@
+const body = document.querySelector('body')
+body.insertAdjacentHTML('beforeend', `<header></header>`)
+body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
+body.insertAdjacentHTML('beforeend', `<footer></footer>`)
+
+/////////////////////////////////////////////////////init//////////////////////////////////////////
+
 const items = document.querySelector('.items')
+const cells = []
 let elementsPerString = 3
-let answer = {}
-
-
-answer = [
-    { top: 0, left: 0 },
-    { left: 100, top: 0, inner: 1 },
-    { left: 200, top: 0, inner: 2 },
-    { left: 0, top: 100, inner: 3 },
-    { left: 100, top: 100, inner: 4 },
-    { left: 200, top: 100, inner: 5 },
-    { left: 0, top: 200, inner: 6 },
-    { left: 100, top: 200, inner: 7 },
-    { left: 200, top: 200, inner: 8 }
-]
 
 const empty = {
     top: 0,
     left: 0
 }
 
-const cells = []
 cells.push(empty)
 
-for (let i = 1; i < elementsPerString ** 2; i++) {
-    const cell = document.createElement('div')
-    cell.className = 'cell'
-    cell.innerHTML = i
+elementsAdd(3)
 
-    const left = i % elementsPerString
-    const top = (i - left) / elementsPerString
+///////////////////////////////////////////////////making elements///////////////////////////////////
 
-    cell.style.left = `${left * 100}px`
-    cell.style.top = `${top * 100}px`
+function elementsAdd(amount) {
+    const numbers = [...Array(amount ** 2 - 1).keys()]
+    .map(x => x + 1)
+    .sort(() => Math.random() - 0.5);
 
-    cells.push({
-        left: left * 100,
-        top: top * 100,
-        inner: i
-    })
+    for (let i = 1; i < amount ** 2; i++) {
+        const cell = document.createElement('div')
+        cell.className = 'cell'
+        cell.innerHTML = numbers[i - 1]
 
-    items.append(cell)
+        const left = i % amount
+        const top = (i - left) / amount
+
+        cell.style.left = `${left * 100}px`
+        cell.style.top = `${top * 100}px`
+
+        cells.push({
+            left: left * 100,
+            top: top * 100,
+            inner: numbers[i - 1]
+        })
+
+        items.append(cell)
+    }
 }
 
+//////////////////////////////////////////////////////engine////////////////////////////////////////////////////
+
 const cell = document.querySelectorAll('.cell')
-console.log(cells)
 
 cell.forEach(e => {
     e.addEventListener('click', () => {
@@ -69,7 +73,7 @@ cell.forEach(e => {
                         if (e.inner * 100 === e.top * elementsPerString + e.left) {
                             count1++
                         }
-                        if (e.inner * 100-100 === e.top * elementsPerString + e.left) {
+                        if (e.inner * 100 - 100 === e.top * elementsPerString + e.left) {
                             count2++
                         }
                     })
