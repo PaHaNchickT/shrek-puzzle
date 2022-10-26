@@ -8,18 +8,20 @@ const body = document.querySelector('body')
 /////////////////////////////////////////////////////init//////////////////////////////////////////
 
 
-const items = document.querySelector('.items')
-const timerText = document.querySelector('.timer')
-const restart = document.querySelector('.restart')
-const stepsText = document.querySelector('.steps')
+const items = document.querySelector('.items'),
+    timerText = document.querySelector('.timer'),
+    restart = document.querySelector('.restart'),
+    stepsText = document.querySelector('.steps'),
+    soundBtn = document.querySelector('.sound-wrapper')
 
-let cells = []
-let elementsPerString = 4
-let isTimer = 0
-let steps = 0
-let timerID
-
-let empty = {
+let cells = [],
+    elementsPerString = 4,
+    isTimer = 0,
+    steps = 0,
+    timerID,
+    isSound = true,
+    
+    empty = {
     top: 0,
     left: 0
 }
@@ -160,5 +162,17 @@ restart.addEventListener('click', function () {
 function sound() {
     let audio = new Audio()
     audio.src = '../assets/sounds/cell-move.mp3'
-    audio.autoplay = true
+    if (isSound === true) {
+        audio.autoplay = true
+    }
 }
+
+soundBtn.addEventListener('click', () => {
+    if (isSound === true) {
+        soundBtn.childNodes[1].innerHTML = 'Sound On'
+        isSound = false
+    } else {
+        soundBtn.childNodes[1].innerHTML = 'Sound Off'
+        isSound = true
+    }
+})

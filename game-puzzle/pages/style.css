@@ -53,6 +53,7 @@ header {
   border-radius: 10px;
   position: relative;
   background-image: url(../assets/images/swamp-bg.jpg);
+  top: 20px;
 }
 
 .cell {
@@ -106,5 +107,36 @@ header {
 .steps, .size {
   margin: 0;
   font-size: 20px;
+}
+
+.size-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+.settings-wrapper {
+  top: 140px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  z-index: 5;
+}
+
+.values {
+  position: absolute;
+  top: -112px;
+}
+
+.sound-wrapper {
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */
