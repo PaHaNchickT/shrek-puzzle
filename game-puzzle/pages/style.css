@@ -38,6 +38,7 @@ header, footer {
   background-color: #3d3020;
   -webkit-box-shadow: 0px 0px 50px 10px #3d3020;
           box-shadow: 0px 0px 50px 10px #3d3020;
+  background-image: 100%;
   border-radius: 10px;
   position: relative;
   background-image: url(/assets/images/swamp-bg.jpg);
