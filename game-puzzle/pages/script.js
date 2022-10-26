@@ -119,8 +119,12 @@ function elementsDel() {
 click(items.childNodes)
 
 function click(cell) {
-    cell.forEach(e => {
+    cell.forEach((e, ind) => {
+        if (ind === 0) {
+            return
+        }
         e.addEventListener('click', () => {
+            // debugger
             if (isTimer === 0) {
                 timer()
             }
@@ -129,7 +133,7 @@ function click(cell) {
                     let tempLeft = el.left
                     let tempTop = el.top
 
-                    if (Math.abs((el.left - empty.left)) <= 80 && Math.abs((el.top - empty.top)) <= 80 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
+                    if (Math.abs((el.left - empty.left)) <= 100 && Math.abs((el.top - empty.top)) <= 100 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
                         sound()
 
                         e.style.left = `${empty.left}px`
@@ -144,10 +148,10 @@ function click(cell) {
                         let count1 = 0,
                             count2 = 0
                         cells.forEach(e => {
-                            if (e.inner * 80 === e.top * elementsPerString + e.left) {
+                            if (e.inner * 100 === e.top * elementsPerString + e.left) {
                                 count1++
                             }
-                            if (e.inner * 80 - 80 === e.top * elementsPerString + e.left) {
+                            if (e.inner * 100 - 100 === e.top * elementsPerString + e.left) {
                                 count2++
                             }
                         })
@@ -195,7 +199,6 @@ function restartBtn() {
     stepsText.innerHTML = `Steps 0`
 
     soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
-
     valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
 
     body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
