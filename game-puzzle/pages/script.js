@@ -7,10 +7,14 @@ const body = document.querySelector('body')
 
 
 const items = document.querySelector('.items')
-const cells = []
-let elementsPerString = 4
+const timerText = document.querySelector('.timer')
+const restart = document.querySelector('.restart')
 
-const empty = {
+let cells = []
+let elementsPerString = 4
+let isTimer = 0
+
+let empty = {
     top: 0,
     left: 0
 }
@@ -19,12 +23,19 @@ cells.push(empty)
 
 elementsAdd(elementsPerString)
 
-///////////////////////////////////////////////////making elements///////////////////////////////////
+///////////////////////////////////////////////////adding elements///////////////////////////////////
 
 function elementsAdd(amount) {
+    cells = []
+    empty = {
+        top: 0,
+        left: 0
+    }
+    
+    console.log(cells)
     const numbers = [...Array(amount ** 2 - 1).keys()]
-    .map(x => x + 1)
-    .sort(() => Math.random() - 0.5);
+        .map(x => x + 1)
+        .sort(() => Math.random() - 0.5);
 
     for (let i = 1; i < amount ** 2; i++) {
         const cell = document.createElement('div')
@@ -46,16 +57,29 @@ function elementsAdd(amount) {
         items.append(cell)
     }
 
-    items.style.width = `${amount*80}px`
-    items.style.height = `${amount*80}px`
+    items.style.width = `${amount * 80}px`
+    items.style.height = `${amount * 80}px`
+}
+
+//////////////////////////////////////////////////deleting elements////////////////////////////////////////////
+
+function elementsDel() {
+    items.childNodes.forEach(e => {
+        items.removeChild(e)
+        elementsDel()
+    })
 }
 
 //////////////////////////////////////////////////////engine////////////////////////////////////////////////////
 
-const cell = document.querySelectorAll('.cell')
+let cell = items.childNodes
 
 cell.forEach(e => {
     e.addEventListener('click', () => {
+        console.log('clicked')
+        if (isTimer === 0) {
+            timer()
+        }
         cells.forEach(el => {
             if (el.inner === +e.innerHTML) {
                 let tempLeft = el.left
@@ -91,3 +115,27 @@ cell.forEach(e => {
 })
 
 ///////////////////////////////////////////////////////timer//////////////////////////////////////////////
+
+function timer() {
+    let seconds = 0,
+        minutes = 0
+    isTimer = 1
+    setInterval(() => {
+        seconds++
+        if (seconds === 60) {
+            minutes++
+            seconds = 0
+        }
+        timerText.innerHTML = `${minutes} min ${seconds} sec`
+        console.log(minutes, seconds)
+    }, 1000)
+}
+
+///////////////////////////////////////////////////////restart//////////////////////////////////////////////
+
+restart.addEventListener('click', function() {
+    elementsDel()
+    elementsAdd(elementsPerString)
+    cell = items.childNodes
+    console.log(cell)
+})

@@ -3,7 +3,7 @@
   src: url(/assets/fonts/shrek.ttf);
 }
 
-html, body {
+html, body, p {
   margin: 0;
   font-family: Shrek;
   color: #d6db26;
@@ -29,6 +29,17 @@ header, footer {
   background-color: black;
   height: 60px;
   font-size: 20px;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .items {
