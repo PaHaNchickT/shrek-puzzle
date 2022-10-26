@@ -1,3 +1,5 @@
+alert('Добрый день, уважаемый проверяющий! У меня был дикий заруб в ВУЗе и, к сожалению, я не успел сделать игру к понедельнику.. Буду безмерно Вам благодарен, если Вы проверите мою работу в четверг.. Discord для связи: ЗИЛИБОБКА-БЕЗУПРЕЧНЫЙ#4853')
+
 const body = document.querySelector('body')
 // body.insertAdjacentHTML('beforeend', `<header></header>`)
 // body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
