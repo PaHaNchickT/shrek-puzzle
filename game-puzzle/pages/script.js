@@ -39,7 +39,7 @@ function elementsAdd(amount) {
 
     const numbers = [...Array(amount ** 2 - 1).keys()]
         .map(x => x + 1)
-        // .sort(() => Math.random() - 0.5);
+        .sort(() => Math.random() - 0.5);
 
     for (let i = 1; i < amount ** 2; i++) {
         const cell = document.createElement('div')
@@ -90,6 +90,8 @@ function click(cell) {
                     let tempTop = el.top
 
                     if (Math.abs((el.left - empty.left)) <= 80 && Math.abs((el.top - empty.top)) <= 80 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
+                        sound()
+                        
                         e.style.left = `${empty.left}px`
                         e.style.top = `${empty.top}px`
 
@@ -153,3 +155,11 @@ restart.addEventListener('click', function () {
     timerText.innerHTML = `0 min 0 sec`
     stepsText.innerHTML = `Steps 0`
 })
+
+/////////////////////////////////////////////////////////sound/////////////////////////////////////////////////
+
+function sound() {
+    let audio = new Audio()
+    audio.src = '../assets/sounds/cell-move.mp3'
+    audio.autoplay = true
+}
