@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Shrek';
-  src: url(/assets/fonts/shrek.ttf);
+  src: url(./assets/fonts/shrek.ttf);
 }
 
 html, body, p {
@@ -20,7 +20,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-image: url(/assets/images/shrek-bg.gif);
+  background-image: url(./assets/images/shrek-bg.gif);
   background-size: 2200px;
   background-position-x: 50%;
 }
@@ -52,7 +52,7 @@ header {
   background-image: 100%;
   border-radius: 10px;
   position: relative;
-  background-image: url(/assets/images/swamp-bg.jpg);
+  background-image: url(./assets/images/swamp-bg.jpg);
 }
 
 .cell {
@@ -75,7 +75,7 @@ header {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   cursor: pointer;
-  background-image: url(/assets/images/lily.png);
+  background-image: url(./assets/images/lily.png);
   background-size: 100%;
 }
 
