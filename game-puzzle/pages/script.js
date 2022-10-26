@@ -14,7 +14,8 @@ const items = document.querySelector('.items'),
     stepsText = document.querySelector('.steps'),
     soundBtn = document.querySelector('.sound-wrapper'),
     fieldBtn = document.querySelector('.field-btn'),
-    values = document.querySelector('.size-wrapper')
+    values = document.querySelector('.size-wrapper'),
+    valuesList = document.querySelector('.values')
 
 let cells = [],
     elementsPerString = 4,
@@ -23,11 +24,11 @@ let cells = [],
     timerID,
     isSound = true,
     isMenu = false,
-    
+
     empty = {
-    top: 0,
-    left: 0
-}
+        top: 0,
+        left: 0
+    }
 
 cells.push(empty)
 
@@ -36,6 +37,8 @@ elementsAdd(elementsPerString)
 ///////////////////////////////////////////////////adding elements///////////////////////////////////
 
 function elementsAdd(amount) {
+    items.classList.remove(items.className.slice(items.className.length - 7, items.className.length))
+    items.classList.add(`field-${elementsPerString}`)
     cells = []
     empty = {
         top: 0,
@@ -48,26 +51,23 @@ function elementsAdd(amount) {
 
     for (let i = 1; i < amount ** 2; i++) {
         const cell = document.createElement('div')
-        cell.className = 'cell'
+        cell.className = `cell cell-${elementsPerString}`
         cell.innerHTML = numbers[i - 1]
 
         const left = i % amount
         const top = (i - left) / amount
 
-        cell.style.left = `${left * 80}px`
-        cell.style.top = `${top * 80}px`
+        cell.style.left = `${left * (items.offsetWidth / amount)}px`
+        cell.style.top = `${top * (items.offsetWidth / amount)}px`
 
         cells.push({
-            left: left * 80,
-            top: top * 80,
+            left: left * (items.offsetWidth / amount),
+            top: top * (items.offsetWidth / amount),
             inner: numbers[i - 1]
         })
 
         items.append(cell)
     }
-
-    items.style.width = `${amount * 80}px`
-    items.style.height = `${amount * 80}px`
 }
 
 //////////////////////////////////////////////////deleting elements////////////////////////////////////////////
@@ -148,7 +148,9 @@ function timer() {
 
 ///////////////////////////////////////////////////////restart//////////////////////////////////////////////
 
-restart.addEventListener('click', function () {
+restart.addEventListener('click', restartBtn)
+
+function restartBtn() {
     steps = 0
     elementsDel()
     elementsAdd(elementsPerString)
@@ -158,7 +160,7 @@ restart.addEventListener('click', function () {
     steps = 0
     timerText.innerHTML = `0 min 0 sec`
     stepsText.innerHTML = `Steps 0`
-})
+}
 
 /////////////////////////////////////////////////////////sound/////////////////////////////////////////////////
 
@@ -192,4 +194,11 @@ fieldBtn.addEventListener('click', () => {
         values.childNodes[3].classList.add('menu-off')
         isMenu = false
     }
+})
+
+valuesList.querySelectorAll('p').forEach(e => {
+    e.addEventListener('click', () => {
+        elementsPerString = +e.innerHTML.slice(0, 1)
+        restartBtn()
+    })
 })

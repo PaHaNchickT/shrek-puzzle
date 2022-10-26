@@ -44,8 +44,6 @@ header {
 
 .items {
   margin: auto;
-  width: 300px;
-  height: 300px;
   background-color: #3d3020;
   -webkit-box-shadow: 0px 0px 50px 10px #3d3020;
           box-shadow: 0px 0px 50px 10px #3d3020;
@@ -57,8 +55,6 @@ header {
 }
 
 .cell {
-  width: 80px;
-  height: 80px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 10px;
@@ -117,7 +113,8 @@ header {
 }
 
 .settings-wrapper {
-  top: 140px;
+  top: -25px;
+  left: 10px;
   -ms-flex-item-align: center;
       align-self: center;
   width: 300px;
@@ -166,5 +163,70 @@ header {
 
 .size-wrapper > p:hover, .sound-wrapper > p:hover, .cell:hover, .restart:hover {
   color: white;
+}
+
+.cell-3 {
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+}
+
+.field-3 {
+  width: 300px;
+  height: 300px;
+}
+
+.cell-4 {
+  width: 80px;
+  height: 80px;
+}
+
+.field-4 {
+  width: 320px;
+  height: 320px;
+}
+
+.cell-5 {
+  width: 64px;
+  height: 64px;
+  font-size: 25px;
+}
+
+.field-5 {
+  width: 320px;
+  height: 320px;
+}
+
+.cell-6 {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.field-6 {
+  width: 300px;
+  height: 300px;
+}
+
+.cell-7 {
+  width: 45px;
+  height: 45px;
+  font-size: 17px;
+}
+
+.field-7 {
+  width: 315px;
+  height: 315px;
+}
+
+.cell-8 {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.field-8 {
+  width: 320px;
+  height: 320px;
 }
 /*# sourceMappingURL=style.css.map */
