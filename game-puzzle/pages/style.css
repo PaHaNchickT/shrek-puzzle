@@ -1,5 +1,14 @@
+@font-face {
+  font-family: 'Shrek';
+  src: url(/assets/fonts/shrek.ttf);
+}
+
 html, body {
   margin: 0;
+  font-family: Shrek;
+  color: #d6db26;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -11,27 +20,32 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  background-image: url(/assets/images/shrek-bg.gif);
+  background-size: 2200px;
+  background-position-x: 50%;
 }
 
 header, footer {
   background-color: black;
   height: 60px;
+  font-size: 20px;
 }
 
 .items {
   margin: auto;
   width: 300px;
   height: 300px;
-  -webkit-box-shadow: 0px 0px 10px black;
-          box-shadow: 0px 0px 10px black;
+  background-color: #3d3020;
+  -webkit-box-shadow: 0px 0px 50px 10px #3d3020;
+          box-shadow: 0px 0px 50px 10px #3d3020;
   border-radius: 10px;
   position: relative;
+  background-image: url(/assets/images/swamp-bg.jpg);
 }
 
 .cell {
-  border: 3px solid black;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: 10px;
@@ -48,5 +62,29 @@ header, footer {
   position: absolute;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  cursor: pointer;
+  background-image: url(/assets/images/lily.png);
+  background-size: 100%;
+}
+
+.restart {
+  width: 170px;
+  height: 45px;
+  -ms-flex-item-align: center;
+      align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #3d3020;
 }
 /*# sourceMappingURL=style.css.map */

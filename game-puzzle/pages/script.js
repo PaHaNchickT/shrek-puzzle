@@ -1,13 +1,14 @@
 const body = document.querySelector('body')
-body.insertAdjacentHTML('beforeend', `<header></header>`)
-body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
-body.insertAdjacentHTML('beforeend', `<footer></footer>`)
+// body.insertAdjacentHTML('beforeend', `<header></header>`)
+// body.insertAdjacentHTML('beforeend', `<div class="items"></div>`)
+// body.insertAdjacentHTML('beforeend', `<footer></footer>`)
 
 /////////////////////////////////////////////////////init//////////////////////////////////////////
 
+
 const items = document.querySelector('.items')
 const cells = []
-let elementsPerString = 3
+let elementsPerString = 4
 
 const empty = {
     top: 0,
@@ -16,7 +17,7 @@ const empty = {
 
 cells.push(empty)
 
-elementsAdd(3)
+elementsAdd(elementsPerString)
 
 ///////////////////////////////////////////////////making elements///////////////////////////////////
 
@@ -33,17 +34,20 @@ function elementsAdd(amount) {
         const left = i % amount
         const top = (i - left) / amount
 
-        cell.style.left = `${left * 100}px`
-        cell.style.top = `${top * 100}px`
+        cell.style.left = `${left * 80}px`
+        cell.style.top = `${top * 80}px`
 
         cells.push({
-            left: left * 100,
-            top: top * 100,
+            left: left * 80,
+            top: top * 80,
             inner: numbers[i - 1]
         })
 
         items.append(cell)
     }
+
+    items.style.width = `${amount*80}px`
+    items.style.height = `${amount*80}px`
 }
 
 //////////////////////////////////////////////////////engine////////////////////////////////////////////////////
@@ -57,7 +61,7 @@ cell.forEach(e => {
                 let tempLeft = el.left
                 let tempTop = el.top
 
-                if (Math.abs((el.left - empty.left)) <= 100 && Math.abs((el.top - empty.top)) <= 100 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
+                if (Math.abs((el.left - empty.left)) <= 80 && Math.abs((el.top - empty.top)) <= 80 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
                     e.style.left = `${empty.left}px`
                     e.style.top = `${empty.top}px`
 
@@ -70,10 +74,10 @@ cell.forEach(e => {
                     let count1 = 0,
                         count2 = 0
                     cells.forEach(e => {
-                        if (e.inner * 100 === e.top * elementsPerString + e.left) {
+                        if (e.inner * 80 === e.top * elementsPerString + e.left) {
                             count1++
                         }
-                        if (e.inner * 100 - 100 === e.top * elementsPerString + e.left) {
+                        if (e.inner * 80 - 80 === e.top * elementsPerString + e.left) {
                             count2++
                         }
                     })
@@ -86,3 +90,4 @@ cell.forEach(e => {
     })
 })
 
+///////////////////////////////////////////////////////timer//////////////////////////////////////////////
