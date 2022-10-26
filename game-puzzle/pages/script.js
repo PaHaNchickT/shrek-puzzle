@@ -91,7 +91,7 @@ function click(cell) {
 
                     if (Math.abs((el.left - empty.left)) <= 80 && Math.abs((el.top - empty.top)) <= 80 && (Math.abs((el.top - empty.top)) !== Math.abs((el.left - empty.left)))) {
                         sound()
-                        
+
                         e.style.left = `${empty.left}px`
                         e.style.top = `${empty.top}px`
 
@@ -138,7 +138,6 @@ function timer() {
             seconds = 0
         }
         timerText.innerHTML = `${minutes} min ${seconds} sec`
-        console.log(minutes, seconds)
     }, 1000)
 }
 
