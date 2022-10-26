@@ -46,5 +46,7 @@ header, footer {
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 /*# sourceMappingURL=style.css.map */
