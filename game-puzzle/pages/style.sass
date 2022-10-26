@@ -90,7 +90,25 @@ header
 
 .values
     position: absolute
-    top: -112px
+    transition: 0.2s
+    top: -130px
+
+.values > p
+    margin-top: 3px
+    color: white
+    &:hover
+        color: #d6db26       
 
 .sound-wrapper
     cursor: pointer
+
+.menu-off
+    opacity: 0
+
+.menu-on
+    opacity: 1
+
+.size-wrapper > p, .sound-wrapper > p, .cell, .restart
+    transition: 0.2s
+    &:hover
+        color: white

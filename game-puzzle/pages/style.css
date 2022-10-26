@@ -133,10 +133,38 @@ header {
 
 .values {
   position: absolute;
-  top: -112px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  top: -130px;
+}
+
+.values > p {
+  margin-top: 3px;
+  color: white;
+}
+
+.values > p:hover {
+  color: #d6db26;
 }
 
 .sound-wrapper {
   cursor: pointer;
+}
+
+.menu-off {
+  opacity: 0;
+}
+
+.menu-on {
+  opacity: 1;
+}
+
+.size-wrapper > p, .sound-wrapper > p, .cell, .restart {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.size-wrapper > p:hover, .sound-wrapper > p:hover, .cell:hover, .restart:hover {
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

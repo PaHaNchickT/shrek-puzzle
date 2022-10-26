@@ -12,7 +12,9 @@ const items = document.querySelector('.items'),
     timerText = document.querySelector('.timer'),
     restart = document.querySelector('.restart'),
     stepsText = document.querySelector('.steps'),
-    soundBtn = document.querySelector('.sound-wrapper')
+    soundBtn = document.querySelector('.sound-wrapper'),
+    fieldBtn = document.querySelector('.field-btn'),
+    values = document.querySelector('.size-wrapper')
 
 let cells = [],
     elementsPerString = 4,
@@ -20,6 +22,7 @@ let cells = [],
     steps = 0,
     timerID,
     isSound = true,
+    isMenu = false,
     
     empty = {
     top: 0,
@@ -174,5 +177,19 @@ soundBtn.addEventListener('click', () => {
     } else {
         soundBtn.childNodes[1].innerHTML = 'Sound Off'
         isSound = true
+    }
+})
+
+///////////////////////////////////////////////////////////field change////////////////////////////////////////////
+
+fieldBtn.addEventListener('click', () => {
+    if (isMenu === false) {
+        values.childNodes[3].classList.remove('menu-off')
+        values.childNodes[3].classList.add('menu-on')
+        isMenu = true
+    } else {
+        values.childNodes[3].classList.remove('menu-on')
+        values.childNodes[3].classList.add('menu-off')
+        isMenu = false
     }
 })
