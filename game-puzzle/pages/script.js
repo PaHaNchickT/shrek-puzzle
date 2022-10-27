@@ -64,7 +64,8 @@ if (localStorage.getItem('cells') === null && localStorage.getItem('empty') === 
 
 ///////////////////////////////////////////////vars///////////////////////////////////////////////
 
-console.log(body)
+console.log(body.childNodes[8])
+console.log(body.childNodes)
 soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
 
 valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
