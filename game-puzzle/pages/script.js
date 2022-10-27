@@ -64,13 +64,11 @@ if (localStorage.getItem('cells') === null && localStorage.getItem('empty') === 
 
 ///////////////////////////////////////////////vars///////////////////////////////////////////////
 
-console.log(body.childNodes[8])
-console.log(body.childNodes)
-soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
+soundBtnFunc(body.childNodes[4].childNodes[0].childNodes[1])
 
-valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+valueFunc(body.childNodes[4].childNodes[0].childNodes[0])
 
-body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+body.childNodes[4].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
     e.addEventListener('click', () => {
         elementsPerString = +e.innerHTML.slice(0, 1)
         restartBtn()
