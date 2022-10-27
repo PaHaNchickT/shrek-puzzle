@@ -1,10 +1,12 @@
-// alert('Добрый день, уважаемый проверяющий! У меня был дикий заруб в ВУЗе и, к сожалению, я не успел сделать игру к понедельнику.. Буду безмерно Вам благодарен, если Вы проверите мою работу в четверг.. Discord для связи: ЗИЛИБОБКА-БЕЗУПРЕЧНЫЙ#4853')
-
 const body = document.querySelector('body')
 body.insertAdjacentHTML('beforeend', '<header>')
 body.querySelector('header').insertAdjacentHTML('beforeend', `<p>Shrek Puzzle</p>`)
 body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="steps">Steps 0</div>`)
 body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="timer">Your time</div>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="leader-board"></div>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="leader-window"></div>`)
+body.querySelector('header').insertAdjacentHTML('beforeend', `<div class="bg"></div>`)
+body.querySelector('.leader-window').insertAdjacentHTML('beforeend', `<div class="cross"></div>`)
 
 body.insertAdjacentHTML('beforeend', '<div class="items field-4"></div>')
 body.insertAdjacentHTML('beforeend', '<div class="restart">Restart</div>')
@@ -21,24 +23,30 @@ let items = document.querySelector('.items'),
     soundBtn = document.querySelector('.sound-wrapper'),
     fieldBtn = document.querySelector('.field-btn'),
     values = document.querySelector('.size-wrapper'),
-    valuesList = document.querySelector('.values')
+    valuesList = document.querySelector('.values'),
+    leaderBtn = document.querySelector('.leader-board'),
+    leaderBoard = document.querySelector('.leader-window'),
+    bg = document.querySelector('.bg'),
+    exit = document.querySelector('.cross'),
 
-////////////////////////////////////////////LOCAL STORAGE//////////////////////////////////////////
-
-let cells,
+    cells,
     empty,
     elementsPerString = 4,
     isTimer = 0,
     steps = 0,
     timerID,
     isSound = true,
-    isMenu = false
+    isMenu = false,
+    isLeader = false,
+    leaderList
 
-// cells = []
-// empty = {
-//     top: 0,
-//     left: 0
-// }
+////////////////////////////////////////////LOCAL STORAGE//////////////////////////////////////////
+
+if (localStorage.getItem('leader') === null) {
+    leaderList = []
+} else {
+    leaderList = localStorage.getItem('leader').split(',')
+}
 
 if (localStorage.getItem('cells') === null && localStorage.getItem('empty') === null) {
     cells = []
@@ -68,7 +76,6 @@ body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p
     })
 })
 
-
 ///////////////////////////////////////////////////adding elements///////////////////////////////////
 
 function settingsAdding() {
@@ -97,7 +104,7 @@ function elementsAdd(amount) {
 
     const numbers = [...Array(amount ** 2 - 1).keys()]
         .map(x => x + 1)
-        .sort(() => Math.random() - 0.5);
+    // .sort(() => Math.random() - 0.5);
 
     for (let i = 1; i < amount ** 2; i++) {
         const cell = document.createElement('div')
@@ -126,7 +133,6 @@ function elementsLoad(amount) {
     stepsText.innerHTML = `Steps ${steps}`
     timer(localStorage.getItem('min'), localStorage.getItem('sec'))
 
-    console.log(elementsPerString)
     settingsAdding()
     items.classList.remove(items.className.slice(items.className.length - 7, items.className.length))
     items.classList.add(`field-${elementsPerString}`)
@@ -165,7 +171,6 @@ function click(cell) {
             return
         }
         e.addEventListener('click', () => {
-            // debugger
             if (isTimer === 0) {
                 timer(0, 0)
             }
@@ -199,7 +204,10 @@ function click(cell) {
                         steps++
                         stepsText.innerHTML = `Steps ${steps}`
                         if (count1 === elementsPerString * elementsPerString - 1 || count2 === elementsPerString * elementsPerString - 1) {
+                            leaderList.push(`${steps} steps in ${timerText.innerHTML}`)
+                            localStorage.setItem('leader', leaderList)
                             alert(`Hooray! You solved the puzzle in ${timerText.innerHTML} and ${steps} moves!`)
+                            restartBtn()
                         }
                     }
                 }
@@ -296,3 +304,33 @@ window.onbeforeunload = function () {
     localStorage.setItem('elements', elementsPerString)
     localStorage.setItem('steps', steps)
 };
+
+////////////////////////////////////////////////////////leader board///////////////////////////////////////////////
+
+leaderBtn.addEventListener('click', () => {
+    leaderBoard.childNodes.forEach(e => {
+        leaderBoard.removeChild(e)
+    })
+    if (isLeader === false) {
+        leaderBoard.style.display = 'flex'
+        bg.style.display = 'block'
+        for (; leaderList.length>10; leaderList.pop()) {}
+        leaderBoard.insertAdjacentHTML('beforeend', `<div class="cross"></div>`)
+        leaderList.sort().forEach(e => {
+            leaderBoard.insertAdjacentHTML('beforeend', `<div>${e}</div>`)
+        })
+    } else {
+        leaderBoard.style.display = 'none'
+        bg.style.display = 'none'
+    }
+})
+
+bg.addEventListener('click', () => {
+    leaderBoard.style.display = 'none'
+    bg.style.display = 'none'
+})
+
+leaderBoard.addEventListener('click', () => {
+    leaderBoard.style.display = 'none'
+    bg.style.display = 'none'
+})
