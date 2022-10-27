@@ -104,7 +104,7 @@ function elementsAdd(amount) {
 
     const numbers = [...Array(amount ** 2 - 1).keys()]
         .map(x => x + 1)
-    // .sort(() => Math.random() - 0.5);
+        .sort(() => Math.random() - 0.5);
 
     for (let i = 1; i < amount ** 2; i++) {
         const cell = document.createElement('div')
@@ -314,7 +314,7 @@ leaderBtn.addEventListener('click', () => {
     if (isLeader === false) {
         leaderBoard.style.display = 'flex'
         bg.style.display = 'block'
-        for (; leaderList.length>10; leaderList.pop()) {}
+        for (; leaderList.length > 10; leaderList.pop()) { }
         leaderBoard.insertAdjacentHTML('beforeend', `<div class="cross"></div>`)
         leaderList.sort().forEach(e => {
             leaderBoard.insertAdjacentHTML('beforeend', `<div>${e}</div>`)
