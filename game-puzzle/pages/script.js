@@ -64,16 +64,31 @@ if (localStorage.getItem('cells') === null && localStorage.getItem('empty') === 
 
 ///////////////////////////////////////////////vars///////////////////////////////////////////////
 
-soundBtnFunc(body.childNodes[4].childNodes[0].childNodes[1])
+////for local////
 
-valueFunc(body.childNodes[4].childNodes[0].childNodes[0])
+soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
 
-body.childNodes[4].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+
+body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
     e.addEventListener('click', () => {
         elementsPerString = +e.innerHTML.slice(0, 1)
         restartBtn()
     })
 })
+
+///for deploy////
+
+// soundBtnFunc(body.childNodes[4].childNodes[0].childNodes[1])
+
+// valueFunc(body.childNodes[4].childNodes[0].childNodes[0])
+
+// body.childNodes[4].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+//     e.addEventListener('click', () => {
+//         elementsPerString = +e.innerHTML.slice(0, 1)
+//         restartBtn()
+//     })
+// })
 
 ///////////////////////////////////////////////////adding elements///////////////////////////////////
 
@@ -246,15 +261,27 @@ function restartBtn() {
     timerText.innerHTML = `0 min 0 sec`
     stepsText.innerHTML = `Steps 0`
 
-    soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
-    valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+    //////for deploy////////
+    soundBtnFunc(body.childNodes[4].childNodes[0].childNodes[1])
+    valueFunc(body.childNodes[4].childNodes[0].childNodes[0])
 
-    body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+    body.childNodes[4].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
         e.addEventListener('click', () => {
             elementsPerString = +e.innerHTML.slice(0, 1)
             restartBtn()
         })
     })
+
+    /////for local//////////
+    // soundBtnFunc(body.childNodes[8].childNodes[0].childNodes[1])
+    // valueFunc(body.childNodes[8].childNodes[0].childNodes[0])
+
+    // body.childNodes[8].childNodes[0].childNodes[0].childNodes[1].querySelectorAll('p').forEach(e => {
+    //     e.addEventListener('click', () => {
+    //         elementsPerString = +e.innerHTML.slice(0, 1)
+    //         restartBtn()
+    //     })
+    // })
 }
 
 /////////////////////////////////////////////////////////sound/////////////////////////////////////////////////
