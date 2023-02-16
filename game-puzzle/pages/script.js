@@ -360,3 +360,5 @@ leaderBoard.addEventListener('click', () => {
     leaderBoard.style.display = 'none'
     bg.style.display = 'none'
 })
+
+//test text
